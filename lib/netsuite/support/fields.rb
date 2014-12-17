@@ -31,6 +31,8 @@ module NetSuite
               if value.nil?
                 attributes.delete(name_sym)
               else
+
+                puts "#TS Class Based field #{value} #{value.class} - KLASS [#{klass}]"
                 attributes[name_sym] = value.kind_of?(klass) ? value : klass.new(value)
               end
             end
