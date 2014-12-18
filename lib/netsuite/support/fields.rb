@@ -23,6 +23,7 @@ module NetSuite
           name_sym = name.to_sym
           fields << name_sym
           if klass
+            raise ArgumentError.new("Defining Field #{name} requires class/module got #{klass.class}") unless(klass.is_a?(Class))
             define_method(name_sym) do
               attributes[name_sym] ||= klass.new
             end
@@ -31,8 +32,6 @@ module NetSuite
               if value.nil?
                 attributes.delete(name_sym)
               else
-
-                puts "#TS Class Based field #{value} #{value.class} - KLASS [#{klass}]"
                 attributes[name_sym] = value.kind_of?(klass) ? value : klass.new(value)
               end
             end

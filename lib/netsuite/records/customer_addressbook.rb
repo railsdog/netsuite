@@ -10,7 +10,7 @@ module NetSuite
       # https://github.com/NetSweet/netsuite/wiki/Miscellaneous-Web-Services-Quirks#customer
 
       fields :default_shipping, :default_billing, :is_residential, :label, :internal_id
-      #TS, :attention, :addressee, :phone, :addr1, :addr2, :addr3, :city, :zip, :override, :state
+      #TS moded to Address, :attention, :addressee, :phone, :addr1, :addr2, :addr3, :city, :zip, :override, :state
 
       field :country, NetSuite::Support::Country
 
@@ -20,14 +20,14 @@ module NetSuite
 
       def initialize(attributes_or_record = {})
 
-        puts "INIT CustomerAddressbook #{attributes_or_record}"
         case attributes_or_record
         when self.class
           initialize_from_record(attributes_or_record)
         when Hash
           attributes_or_record = attributes_or_record[:addressbook] if attributes_or_record[:addressbook]
           initialize_from_attributes_hash(attributes_or_record)
-          addressbook_address = RecordRef.new(attributes_or_record[:addressbook_address])
+          #TS not sure what this styl;e does or if required
+          # addressbook_address = RecordRef.new(attributes_or_record[:addressbook_address]) if attributes_or_record[:addressbook_address]
         end
       end
 
@@ -40,6 +40,7 @@ module NetSuite
         self.addressbook_address    = obj.addressbook_address
         self.internal_id            = obj.internal_id
       end
+
 
     end
   end

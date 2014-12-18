@@ -29,6 +29,7 @@ module NetSuite
         if attributes.keys.map(&:to_sym).include?(m.to_sym)
           attributes[m.to_sym]
         else
+          puts m, *args
           super
         end
       end

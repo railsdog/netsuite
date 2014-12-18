@@ -30,8 +30,12 @@ module NetSuite
         :to_be_printed, :total_cost_estimate, :tracking_numbers, :tran_date, :tran_id, :tran_is_vsoe_bundle,
         :transaction_bill_address, :transaction_ship_address, :vat_reg_num, :vsoe_auto_calc
 
-      field :transaction_bill_address, BillAddress
-      field :transaction_ship_address, ShipAddress
+      #TS 2014_2 field :transaction_bill_address, BillAddress
+      field :billingAddress, BillAddress
+
+      #TS 2014_2 field :transaction_ship_address, ShipAddress
+      field :shippingAddress, ShipAddress
+
       field :item_list,                InvoiceItemList
       field :custom_field_list,        CustomFieldList
 
@@ -48,6 +52,7 @@ module NetSuite
       def initialize(attributes = {})
         @internal_id = attributes.delete(:internal_id) || attributes.delete(:@internal_id)
         @external_id = attributes.delete(:external_id) || attributes.delete(:@external_id)
+        puts "initialize #{attributes.inspect}"
         initialize_from_attributes_hash(attributes)
       end
 

@@ -21,6 +21,7 @@ module NetSuite
       #   </platformMsgs:record>
       # </platformMsgs:update>
       def request_body
+        
         hash = {
           'platformMsgs:record' => {
             :content! => updated_record.to_record,
@@ -73,6 +74,8 @@ module NetSuite
         def update(options = {}, credentials={})
           options.merge!(:internal_id => internal_id) if respond_to?(:internal_id) && internal_id
           options.merge!(:external_id => external_id) if respond_to?(:external_id) && external_id
+          puts "UPDATE UPDATE", self.class.inspect, options.inspect, credentials.inspect
+          puts "UPDATE CALL"
           response = NetSuite::Actions::Update.call([self.class, options], credentials)
           @errors = response.errors
           response.success?

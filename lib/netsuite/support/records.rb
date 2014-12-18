@@ -5,6 +5,7 @@ module NetSuite
       include Namespaces::PlatformCore
 
       def to_record
+        #puts "#TS IN Records => to_record for #{self.class}"
         attributes.reject { |k,v| self.class.read_only_fields.include?(k) }.inject({}) do |hash, (k,v)|
           kname = "#{record_namespace}:"
           kname += k == :klass ? 'class' : k.to_s.lower_camelcase

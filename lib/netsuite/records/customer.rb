@@ -49,6 +49,7 @@ module NetSuite
 
       def to_record
         rec = super
+        puts "CUSTOMER to_record #{rec.inspect}"
         if rec["#{record_namespace}:customFieldList"]
           rec["#{record_namespace}:customFieldList!"] = rec.delete("#{record_namespace}:customFieldList")
         end
